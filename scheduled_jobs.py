@@ -35,7 +35,6 @@ def process_orders(app):
         )
 
         app.logger.info("Response from endpoint: " + response.text)
-
         response.raise_for_status()
 
         order.set_as_processed()
