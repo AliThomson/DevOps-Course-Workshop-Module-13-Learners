@@ -37,14 +37,17 @@ def process_orders(app):
                 json=payload
             )
         except:
-            order.set_as_failed()
             app.logger.exception("Error processing order {id}".format(id = order.id))
 
         app.logger.info("Response from endpoint: " + response.text)
         
         response.raise_for_status()
 
-        order.set_as_processed()
+        if response.status_code != 200:
+            order.set_as_failed()
+        else:
+            order.set_as_processed()
+            
         save_order(order)
 
 def get_queue_of_orders_to_process():
