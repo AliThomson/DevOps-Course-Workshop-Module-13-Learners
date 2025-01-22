@@ -2,7 +2,7 @@ from azure.monitor.opentelemetry import configure_azure_monitor
 import logging
 
 logging.basicConfig(level=logging.INFO)
-configure_azure_monitor(enable_live_metrics = True)
+configure_azure_monitor()
 
 from flask import Flask, render_template, request
 from datetime import datetime, timezone
