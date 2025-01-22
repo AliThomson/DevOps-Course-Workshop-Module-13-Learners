@@ -37,6 +37,7 @@ def process_orders(app):
                 json=payload
             )
         except:
+            order.set_as_failed()
             app.logger.exception("Error processing order {id}".format(id = order.id))
 
         app.logger.info("Response from endpoint: " + response.text)

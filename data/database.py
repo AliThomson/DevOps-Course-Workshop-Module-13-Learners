@@ -5,11 +5,11 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import or_
 
 db = SQLAlchemy()
-from data.order import Order, QUEUED
+from data.order import Order, QUEUED, FAILED
 
 
 def get_all_orders():
-    return db.session.query(Order).all()
+    return db.session.query(Order).filter(Order.status != FAILED).all()
 
 def get_orders_to_display():
     return (db.session.query(Order)
